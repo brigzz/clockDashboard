@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .clock {
+            position: absolute;
+            transform: translateX(-50%) translateY(-50%);
+            font-family: Arial;
+            letter-spacing: 7px;
+            text-align: center;
+            color: #17D4FE;
+            left: 50%;
+        }
+
+        #display-msg {
+            top: 10%;
+            color: yellow;
+            font-size: 30px;
+        }
+
+        #display-date {
+            top: 30%;
+            font-size: 60px;
+        }
+
+        #display-clock {
+            top: 50%;
+            font-size: 100px;
+        }
+
+        #display-dayDiff {
+            top: 80%;
+            font-size: 30px;
+            color: orange;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #0b8793, #360033);
+        }
+    </style>
+    <script>
+        function showTime() {
+            var date = new Date();
+            const d = date.toDateString();
+            const d1 = new Date('02/08/2020');
+            const dNow = Date.now()
+            let timeDiff = Math.abs(Date.parse(d) - Date.parse(d1));
+            let dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            var date = d;
+            var time = h + ":" + m + ":" + s + " Hrs";
+            document.getElementById("display-date").innerHTML = date;
+            document.getElementById("display-clock").innerHTML = time;
+            document.getElementById("display-dayDiff").innerHTML = `Day: ${dayDiff}`;
+            setTimeout(showTime, 1000);
+        }
+    </script>
+    <script src="particles.js"></script>
+    <script>
+        window.onload = function () {
+            showTime();
+            particlesJS('particles-js',
+                {
+                    "particles": {
+                        "number": {
+                            "value": 43,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "#ffffff"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            },
+                            "image": {
+                                "src": "img/github.svg",
+                                "width": 100,
+                                "height": 100
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.5,
+                            "random": false,
+                            "anim": {
+                                "enable": false,
+                                "speed": 1,
+                                "opacity_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 3,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 0.1,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#ffffff",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 3,
+                            "direction": "none",
+                            "random": true,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "canvas",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "repulse"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 400,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                })
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <div id="display-msg" class="clock">Welcome to ! Have you taken your attendance?</div>
+    <div id="display-date" class="clock"></div>
+    <div id="display-clock" class="clock"></div>
+    <div id="display-dayDiff" class="clock"></div>
+</body>
+
+</html>
