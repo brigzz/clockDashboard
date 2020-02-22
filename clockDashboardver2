@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        small {
+            vertical-align: middle;
+        }
+
+        .clock {
+            font-family: Arial;
+            letter-spacing: 7px;
+            text-align: center;
+            color: #17D4FE;
+            left: 50%;
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        #display-msg {
+            font-size: calc(12px + 0.3vw + 1vh);
+            color: yellow;
+            font-size: 30px;
+            padding: 1rem;
+        }
+
+        #display-date {
+            font-size: calc(16px + 2vw + 0.5vh);
+            word-spacing: 15px;
+            padding: 1rem;
+            margin-top: 15rem;
+        }
+
+        #display-clock {
+            font-size: calc(20px + 2vw + 1vh);
+            letter-spacing: 12px;
+            padding-bottom: 1rem;
+        }
+
+        #display-dayDiff {
+            font-size: calc(12px + 1vw + 1vh);
+            color: orange;
+            margin-top: 15rem;
+            padding: 1rem;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, #0b8793, #360033);
+            z-index: -10;
+            /* background: rgb(34, 193, 195);
+            background: linear-gradient(0deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%); */
+        }
+
+    </style>
+    <script>
+        function showTime() {
+
+            const options = {
+                day: 'numeric', month: 'short', year: 'numeric', weekday: 'long'
+            }
+            let date = new Date();
+            const date2 = date.toLocaleDateString('en-SG', options);
+
+            const d = date.toDateString();
+            const d1 = new Date('02/08/2020');
+
+            let timeDiff = Math.abs(Date.parse(d) - Date.parse(d1));
+            let dayDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+            var h = date.getHours(); // 0 - 23
+            var m = date.getMinutes(); // 0 - 59
+            var s = date.getSeconds(); // 0 - 59
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+
+            var time = h + "<small>:</small>" + m + "<small>:</small>" + "<small>" + s + "</small>" + " <small>hrs</small>";
+            document.getElementById("display-date").innerHTML = date2;
+            document.getElementById("display-clock").innerHTML = time;
+            document.getElementById("display-dayDiff").innerHTML = `Day: ${dayDiff}`;
+            setTimeout(showTime, 1000);
+        }
+    </script>
+    <script src="particles.js"></script>
+    <script>
+        window.onload = function () {
+            showTime();
+            particlesJS('particles-js',
+                {
+                    "particles": {
+                        "number": {
+                            "value": 43,
+                            "density": {
+                                "enable": true,
+                                "value_area": 800
+                            }
+                        },
+                        "color": {
+                            "value": "random"
+                        },
+                        "shape": {
+                            "type": "circle",
+                            "stroke": {
+                                "width": 0.1,
+                                "color": "#000000"
+                            },
+                            "polygon": {
+                                "nb_sides": 5
+                            },
+                            "image": {
+                                "src": "img/github.svg",
+                                "width": 100,
+                                "height": 100
+                            }
+                        },
+                        "opacity": {
+                            "value": 0.9,
+                            "random": false,
+                            "anim": {
+                                "enable": true,
+                                "speed": 1,
+                                "opacity_min": 0.5,
+                                "sync": false
+                            }
+                        },
+                        "size": {
+                            "value": 5,
+                            "random": true,
+                            "anim": {
+                                "enable": false,
+                                "speed": 40,
+                                "size_min": 3,
+                                "sync": false
+                            }
+                        },
+                        "line_linked": {
+                            "enable": true,
+                            "distance": 150,
+                            "color": "#ffffff",
+                            "opacity": 0.4,
+                            "width": 1
+                        },
+                        "move": {
+                            "enable": true,
+                            "speed": 2,
+                            "direction": "none",
+                            "random": true,
+                            "straight": false,
+                            "out_mode": "out",
+                            "bounce": false,
+                            "attract": {
+                                "enable": false,
+                                "rotateX": 600,
+                                "rotateY": 1200
+                            }
+                        }
+                    },
+                    "interactivity": {
+                        "detect_on": "window",
+                        "events": {
+                            "onhover": {
+                                "enable": true,
+                                "mode": "repulse"
+                            },
+                            "onclick": {
+                                "enable": true,
+                                "mode": "push"
+                            },
+                            "resize": true
+                        },
+                        "modes": {
+                            "grab": {
+                                "distance": 400,
+                                "line_linked": {
+                                    "opacity": 1
+                                }
+                            },
+                            "bubble": {
+                                "distance": 400,
+                                "size": 40,
+                                "duration": 2,
+                                "opacity": 8,
+                                "speed": 3
+                            },
+                            "repulse": {
+                                "distance": 200,
+                                "duration": 0.4
+                            },
+                            "push": {
+                                "particles_nb": 4
+                            },
+                            "remove": {
+                                "particles_nb": 2
+                            }
+                        }
+                    },
+                    "retina_detect": true
+                })
+        }
+    </script>
+
+
+</head>
+
+<body>
+    <div id="particles-js"></div>
+    <div id="display-msg" class="clock">Welcome to ! Have you taken your attendance?</div>
+    <div id="display-date" class="clock"></div>
+    <div id="display-clock" class="clock"></div>
+    <div id="display-dayDiff" class="clock"></div>
+</body>
+
+</html>
